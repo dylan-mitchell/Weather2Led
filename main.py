@@ -22,7 +22,9 @@ cities = {
   "losangeles":     "2442047",
   "miami":          "2450022",
   "houston":        "2424766",
-#  "stlouis":        "2486982"
+  "stlouis":        "2486982",
+  "denver":         "2391279",
+  "portland":       "2475687"
 }
 
 # Dictionary of cites and respective pins
@@ -31,7 +33,10 @@ cityPins = {
   "newyork":        {"red":	17, "green":	27, "blue":	22},
   "losangeles":     {"red":	10, "green":	9,  "blue":	11},
   "miami":          {"red":	5,  "green":	6,  "blue":	13},
-  "houston":        {"red":	16, "green":	20, "blue":	21}
+  "houston":        {"red":	16, "green":	20, "blue":	21},
+  "stlouis":        {"red":	14, "green":	15, "blue":	18},
+  "denver":         {"red":	23, "green":	24, "blue":	25},
+  "portland":       {"red":	8, "green":	7, "blue":	12}
 }
 
 # Dictionary of weather abbreviatiions and their respective led colors
@@ -94,7 +99,7 @@ def updateWeatherforCitiesWithDate(cityList, date):
     for city in cities:
         json_data = requests.get(url + cities[city] + date).json()
         weather = extractWeatherFromJson(json_data)
-        cityList.append(City(city, cities[city], weather))
+        cityList.append(City(city, cities[city], weather, cityPins[city]["red"], cityPins[city]["green"], cityPins[city]["blue"]))
 
 def displayCities(cityList):
     try:
