@@ -5,6 +5,7 @@ import time
 import sys
 import datetime
 import RPi.GPIO as GPIO
+import random
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -187,6 +188,28 @@ def main():
                 light_led_clear([city.redPin, city.greenPin,  city.bluePin])
         elif(choice == '6'):
             print("Exiting...")
+            
+        elif(choice == '7'):
+            print("Random Lights!")
+            try:
+                while True:
+                    for city in cityList:
+                        x = random.randint(1,6)
+                        if(x == 1):
+                            light_led(city.redPin, [city.redPin, city.greenPin,  city.bluePin])
+                        if(x == 2):
+                            light_led(city.greenPin, [city.redPin, city.greenPin,  city.bluePin])
+                        if(x == 3):
+                            light_led(city.bluePin, [city.redPin, city.greenPin,  city.bluePin])
+                        if(x == 4):
+                            light_led(city.redPin, [city.redPin, city.greenPin,  city.bluePin])
+                        if(x == 5):
+                            light_led_magenta([city.redPin, city.greenPin,  city.bluePin])
+                        if(x == 6):
+                            light_led_white([city.redPin, city.greenPin,  city.bluePin])
+                sleep(60)
+            except KeyboardInterrupt:
+                pass 
         else:
             print("Invalid Entry...")
 
